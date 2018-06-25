@@ -4,5 +4,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalSize;
 
 public class Main {
-    Terminal terminal;// = new Terminal() {
+    public static void main(String[] arg) {
+        Terminal terminal;// = new Terminal() {
+    }
 }
