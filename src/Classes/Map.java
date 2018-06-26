@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Map {
 
-    List<WallSegment> walls = new ArrayList<>();
+    private List<WallSegment> walls = new ArrayList<>();
     private int updateCounter = 0;
 
     public Map() {
@@ -34,13 +34,18 @@ public class Map {
 
     public void updateLocation() {
         if(updateCounter > 10) {
-            for (WallSegment ws : walls) {
-                ws.moveSegment(walls.get(walls.size()-1).getWallSegment().get(0).getX());
+            int max = walls.get(walls.size()-1).getWallSegment().get(0).getX();
+            System.out.println(max);
+            for (int i = 0; i < walls.size();i++) {
+                walls.get(i).moveSegment(max);
             }
-            WallSegment temp = walls.get(0);
-            walls.remove(0);
-            walls.add(temp);
-            updateCounter = 0;
+
+            if(walls.get(0).getWallSegment().get(0).getX() > 4) {
+                WallSegment temp = walls.get(0);
+                walls.remove(0);
+                walls.add(temp);
+                updateCounter = 0;
+            }
         }
         updateCounter++;
     }
