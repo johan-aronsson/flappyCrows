@@ -5,7 +5,6 @@ import com.googlecode.lanterna.input.Key;
 public class GameEngine {
     private Renderer renderer;
     private GameLogic gameLogic;
-    //private Drawable[] drawables;
     private Map map;
     private Crow crow;
     public GameEngine(){
@@ -20,6 +19,14 @@ public class GameEngine {
     }
 
     public boolean tick() {
+        checkInput();
+        gameLogic.tick(crow,map);
+        renderer.renderCrow(crow);
+        renderer.renderMap(map);
+        return true;
+    }
+
+    private void checkInput() {
         Key key;
         key = renderer.getTerminal().readInput();
         if( key != null){
@@ -30,9 +37,5 @@ public class GameEngine {
             }
             gameLogic.setKey(key);
         }
-        gameLogic.tick(crow,map);
-        renderer.renderCrow(crow);
-        renderer.renderMap(map);
-        return true;
     }
 }
