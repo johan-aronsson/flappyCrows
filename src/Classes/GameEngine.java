@@ -9,10 +9,6 @@ public class GameEngine {
     private Crow crow;
     public GameEngine(){
         renderer = new Renderer();
-        initializeDrawables();
-    }
-
-    private void initializeDrawables() {
         gameLogic = new GameLogic();
         crow = new Crow();
         map = new Map();
