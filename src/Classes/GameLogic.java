@@ -5,7 +5,11 @@ import com.googlecode.lanterna.input.Key;
 public class GameLogic {
     Key key;
     public void tick(Crow crow, Map map) {
-        crow.updateLocation();
+        if(key != null) {
+            crow.updateLocation(true);
+        }else{
+            crow.updateLocation(false);
+        }
     }
 
     public void setKey(Key key) {
