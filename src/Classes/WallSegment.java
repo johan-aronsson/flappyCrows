@@ -25,12 +25,12 @@ public class WallSegment {
 
     }
 
-    public void moveSegment() {
-        for(Coordinate coor : wallSegment)
-            if(coor.getX() == 0){
-                coor.move(99,0);
+    public void moveSegment(int max) {
+        for(int i = 0; i<wallSegment.size(); i++)
+            if(wallSegment.get(i).getX() == 0){
+                wallSegment.get(i).move(max+4, 0);
             }else {
-                coor.move(-1, 0);
+                wallSegment.get(i).move(-1, 0);
             }
     }
 

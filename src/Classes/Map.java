@@ -29,7 +29,7 @@ public class Map {
     public void updateLocation() {
         if(updateCounter > 10) {
             for (WallSegment ws : walls) {
-                ws.moveSegment();
+                ws.moveSegment(walls.get(walls.size()-1).getWallSegment().get(0).getX());
             }
             WallSegment temp = walls.get(0);
             walls.remove(0);
