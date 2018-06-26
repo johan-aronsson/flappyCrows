@@ -11,16 +11,22 @@ public class Map {
 
     public Map() {
         for (int i = 0; i < 100; i++) {
-            if (i%3==0) {
+            if (i%10==0) {
                 WallSegment ws = new WallSegment(i);
                 walls.add(ws);
+            } else {
+                WallSegment ws = new WallSegment(i, 0);
+                walls.add(ws);
+                WallSegment ws2 = new WallSegment(i, 40);
+                walls.add(ws2);
             }
-
         }
-
-
-
     }
+
+
+
+
+
 
     public List<WallSegment> getWalls() {
         return walls;
