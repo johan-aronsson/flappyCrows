@@ -2,17 +2,24 @@ package Classes;
 
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.TerminalSize;
 
 import java.nio.charset.Charset;
 
+
+
 public class Renderer {
-    private Terminal terminal;
+    private static Terminal terminal;
+
+    public static TerminalSize terminalSizes;
+
     //public static Coordinate windowMax;
 
     public Renderer() {
         terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF8"));
         terminal.enterPrivateMode();
         terminal.setCursorVisible(false);
+        terminalSizes = terminal.getTerminalSize();
        // windowMax = new Coordinate(terminal.getTerminalSize().getColumns(), terminal.getTerminalSize().getRows());
     }
 
