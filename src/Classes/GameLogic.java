@@ -3,7 +3,7 @@ package Classes;
 import com.googlecode.lanterna.input.Key;
 
 public class GameLogic {
-    Key key;
+    private Key key;
     public void tick(Crow crow, Map map) {
         if(key != null) {
             crow.updateLocation(true);
@@ -18,6 +18,4 @@ public class GameLogic {
     public void setKey(Key key) {
         this.key = key;
     }
-
-
 }

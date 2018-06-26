@@ -3,9 +3,8 @@ package Classes;
 
 public class Crow extends Drawable{
 
-    Coordinate coordinate;
+    private Coordinate coordinate;
     private int countUpdateLocation = 0;
-
 
     public void updateLocation (Boolean keyPressed) {
         if (keyPressed) {
@@ -25,5 +24,4 @@ public class Crow extends Drawable{
     public Coordinate getCoordinate () {
         return coordinate;
     }
-
 }

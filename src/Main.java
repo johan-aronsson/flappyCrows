@@ -5,6 +5,10 @@ public class Main {
     private static GameEngine engine;
     public static void main(String[] arg) {
         initializeGame();
+        doGameLoop();
+    }
+
+    private static void doGameLoop() {
         while (keepPlaying) {
             try {
                 Thread.sleep(50);
