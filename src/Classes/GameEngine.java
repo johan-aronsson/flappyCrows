@@ -7,11 +7,13 @@ public class GameEngine {
     private GameLogic gameLogic;
     private Map map;
     private Crow crow;
+    private SoundEngine soundEngine;
     public GameEngine(){
         renderer = new Renderer();
         gameLogic = new GameLogic();
         crow = new Crow();
         map = new Map();
+        soundEngine = new SoundEngine();
     }
 
     public boolean tick() {
