@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Map {
 
-    List<WallSegment> walls = new ArrayList<>();
+    private List<WallSegment> walls = new ArrayList<>();
     private int updateCounter = 0;
 
     public Map() {
