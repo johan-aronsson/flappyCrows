@@ -10,6 +10,7 @@ public class GameLogic {
         }else{
             crow.updateLocation(false);
         }
+        key = null;
     }
 
     public void setKey(Key key) {
