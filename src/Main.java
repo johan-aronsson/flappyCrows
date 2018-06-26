@@ -10,9 +10,8 @@ public class Main {
                 Thread.sleep(50);
             } catch (Exception e) {
                 System.out.println("Main thread sleep error");
-
-                keepPlaying = engine.tick();
             }
+            keepPlaying = engine.tick();
         }
     }
 
