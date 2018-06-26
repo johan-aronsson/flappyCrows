@@ -22,12 +22,20 @@ public class Renderer {
         // windowMax = new Coordinate(terminal.getTerminalSize().getColumns(), terminal.getTerminalSize().getRows());
     }
 
-    public void renderCrow(Crow crow) {
+    public void render(Crow crow, Map map) {
         terminal.clearScreen();
         //for (Drawable g : objects) {
         terminal.applyBackgroundColor(crow.getCoordinate().getColor());
         terminal.moveCursor(crow.getCoordinate().getX(), crow.getCoordinate().getY());
         terminal.putCharacter(' ');
+
+
+        renderMap(map);
+        String score = "" + crow.getScore();
+        for(int i = 0; i < score.length(); i++){
+            terminal.moveCursor(5+i,0);
+            terminal.putCharacter(score.charAt(i));
+        }
         //}
     }
 

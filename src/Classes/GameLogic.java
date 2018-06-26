@@ -13,7 +13,7 @@ public class GameLogic {
         }
         key = null;
 
-        map.updateLocation();
+        map.updateLocation(crow);
         return checkForCollission(crow, map);
     }
 
@@ -28,7 +28,7 @@ public class GameLogic {
             }
 
         }
-        if (crowCoordinate.getCoordinate().getY() < 1 || crowCoordinate.getCoordinate().getY() > 39) {
+        if (crowCoordinate.getCoordinate().getY() < 1 || crowCoordinate.getCoordinate().getY() > 30) {
             return false;
         }
         return true;

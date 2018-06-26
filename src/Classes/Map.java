@@ -20,26 +20,21 @@ public class Map {
 
             WallSegment ws = new WallSegment(i, 0);
             floorAndRoof.add(ws);
-            WallSegment ws2 = new WallSegment(i, 40);
+            WallSegment ws2 = new WallSegment(i, 30);
             floorAndRoof.add(ws2);
 
         }
     }
 
-
-    public List<WallSegment> getWalls() {
-        return walls;
-    }
-    public List<WallSegment> getFloorAndRoof() {
-        return floorAndRoof;
-    }
-
-
-    public void updateLocation() {
+    public void updateLocation(Crow crow) {
         if (updateCounter > 10) {
             int max = walls.get(walls.size() - 1).getWallSegment().get(0).getX();
             for (int i = 0; i < walls.size(); i++) {
+                if(crow.getCoordinate().getX() == walls.get(i).getWallSegment().get(1).getX()){
+                    crow.addScore(1);
+                }
                 walls.get(i).moveSegment(max);
+
             }
 
             if (walls.get(0).getWallSegment().get(0).getX() > 4) {
@@ -52,4 +47,14 @@ public class Map {
         }
         updateCounter++;
     }
+
+    public List<WallSegment> getWalls() {
+        return walls;
+    }
+    public List<WallSegment> getFloorAndRoof() {
+        return floorAndRoof;
+    }
+
+
+
 }

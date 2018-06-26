@@ -27,8 +27,7 @@ public class GameEngine {
             checkInput();
             playerAlive = gameLogic.tick(crow, map);
 
-            renderer.renderCrow(crow);
-            renderer.renderMap(map);
+            renderer.render(crow, map);
         }
         renderer.renderDeathScreen();
     }
