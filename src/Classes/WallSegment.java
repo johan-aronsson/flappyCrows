@@ -8,6 +8,7 @@ public class WallSegment {
 
     private List<Coordinate> wallSegment = new ArrayList<>();
 
+
     public List<Coordinate> getWallSegment() {
         return wallSegment;
     }
@@ -19,9 +20,9 @@ public class WallSegment {
     }
 
     public WallSegment(int x) {
-        int randomNum = randomNum(40);
-        for (int y = 0; y < 45; y++) {
-            if (!(y>randomNum && y<randomNum+5)) {
+        int randomNum = randomNum(20);
+        for (int y = 0; y < 30; y++) {
+            if (!(y>randomNum && y<randomNum+7)) {
                 Coordinate coord = new Coordinate(x, y);
                 coord.setColor(99);
                 wallSegment.add(coord);

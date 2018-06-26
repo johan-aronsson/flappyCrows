@@ -7,7 +7,6 @@ import com.googlecode.lanterna.terminal.TerminalSize;
 import java.nio.charset.Charset;
 
 
-
 public class Renderer {
     private static Terminal terminal;
 
@@ -20,7 +19,7 @@ public class Renderer {
         terminal.enterPrivateMode();
         terminal.setCursorVisible(false);
         terminalSizes = terminal.getTerminalSize();
-       // windowMax = new Coordinate(terminal.getTerminalSize().getColumns(), terminal.getTerminalSize().getRows());
+        // windowMax = new Coordinate(terminal.getTerminalSize().getColumns(), terminal.getTerminalSize().getRows());
     }
 
     public void renderCrow(Crow crow) {
@@ -31,19 +30,28 @@ public class Renderer {
         terminal.putCharacter(' ');
         //}
     }
-    public void renderMap(Map map){
-        for (int i = 0; i <map.getWalls().size() ; i++) {
-            for (Coordinate coor: map.getWalls().get(i).getWallSegment()){
+
+    public void renderMap(Map map) {
+        for (int i = 0; i < map.getWalls().size(); i++) {
+            for (Coordinate coor : map.getWalls().get(i).getWallSegment()) {
                 terminal.applyBackgroundColor(coor.getColor());
                 terminal.moveCursor(coor.getX(), coor.getY());
                 terminal.putCharacter(' ');
             }
 
         }
-
+        for (int i = 0; i < map.getFloorAndRoof().size(); i++) {
+            for (Coordinate coor : map.getFloorAndRoof().get(i).getWallSegment()) {
+                terminal.applyBackgroundColor(coor.getColor());
+                terminal.moveCursor(coor.getX(), coor.getY());
+                terminal.putCharacter(' ');
+            }
+        }
     }
+
     public Terminal getTerminal() {
         return this.terminal;
     }
 }
+
 
