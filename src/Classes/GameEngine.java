@@ -1,5 +1,7 @@
 package Classes;
 
+import com.googlecode.lanterna.input.Key;
+
 public class GameEngine {
     private Renderer renderer;
     private GameLogic gameLogic;
@@ -18,7 +20,17 @@ public class GameEngine {
     }
 
     public boolean tick() {
-        gameLogic.tick();
+        Key key;
+        key = renderer.getTerminal().readInput();
+        if( key != null){
+            try{
+                Thread.sleep(5);
+            }catch(Exception e){
+                System.out.println("Thread issue");
+            }
+            gameLogic.setKey(key);
+        }
+        gameLogic.tick(crow,map);
         renderer.renderCrow(crow);
         renderer.renderMap(map);
         return true;

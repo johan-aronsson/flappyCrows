@@ -18,14 +18,17 @@ public class Renderer {
 
     public void renderCrow(Crow crow) {
         terminal.clearScreen();
-        /*for (Drawable g : objects) {
-            terminal.applyBackgroundColor(0);
-            //terminal.moveCursor(g.getX(), g.getY());
-            //terminal.putCharacter(g.getSymbol());
-        }*/
+        //for (Drawable g : objects) {
+        terminal.applyBackgroundColor(crow.getCoordinate().getColor());
+        terminal.moveCursor(crow.getCoordinate().getX(), crow.getCoordinate().getY());
+        terminal.putCharacter(' ');
+        //}
     }
     public void renderMap(Map map){
 
+    }
+    public Terminal getTerminal() {
+        return this.terminal;
     }
 }
 
