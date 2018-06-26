@@ -6,6 +6,11 @@ public class Main {
     public static void main(String[] arg) {
         initializeGame();
         while(keepPlaying){
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
             keepPlaying = engine.tick();
         }
     }

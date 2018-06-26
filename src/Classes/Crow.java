@@ -8,12 +8,12 @@ public class Crow extends Drawable{
 
     public void updateLocation (Boolean keyPressed) {
         if (keyPressed) {
-            coordinate.setY(coordinate.getY()+1);
+            coordinate.move(0, -1);
         }
     }
 
     public Crow () {
-        coordinate = new Coordinate(15, 45, 5);
+        coordinate = new Coordinate(15, 20, 4);
     }
 
     public Coordinate getCoordinate () {
