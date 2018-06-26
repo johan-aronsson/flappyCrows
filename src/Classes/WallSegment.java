@@ -33,10 +33,12 @@ public class WallSegment {
 
     public void moveSegment(int max) {
         for(int i = 0; i<wallSegment.size(); i++)
-            if(wallSegment.get(i).getX() == 0){
-                wallSegment.get(i).move((max+4), 0);
-            }else {
-                wallSegment.get(i).move(-1, 0);
+            if(wallSegment.get(i).getY() != 0 && wallSegment.get(i).getY() != 40) {
+                if (wallSegment.get(i).getX() == 0) {
+                    wallSegment.get(i).move((max + 4), 0);
+                } else {
+                    wallSegment.get(i).move(-1, 0);
+                }
             }
     }
 
