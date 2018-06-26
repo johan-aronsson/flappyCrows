@@ -25,6 +25,14 @@ public class Renderer {
         //}
     }
     public void renderMap(Map map){
+        for (int i = 0; i <map.getWalls().size() ; i++) {
+            for (Coordinate coor: map.getWalls().get(i).getWallSegment()){
+                terminal.applyBackgroundColor(coor.getColor());
+                terminal.moveCursor(coor.getX(), coor.getY());
+                terminal.putCharacter(' ');
+            }
+
+        }
 
     }
     public Terminal getTerminal() {
