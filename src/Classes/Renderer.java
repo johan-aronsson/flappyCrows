@@ -52,6 +52,15 @@ public class Renderer {
     public Terminal getTerminal() {
         return this.terminal;
     }
+
+    public void renderDeathScreen() {
+        terminal.applyBackgroundColor(13);
+        String gameOver = "Game Over";
+        for (int i = 0; i <gameOver.length() ; i++) {
+            terminal.moveCursor(30+i,20);
+            terminal.putCharacter(gameOver.charAt(i));
+        }
+    }
 }
 
 

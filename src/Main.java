@@ -10,12 +10,9 @@ public class Main {
 
     private static void doGameLoop() {
         while (keepPlaying) {
-            try {
-                Thread.sleep(50);
-            } catch (Exception e) {
-                System.out.println("Main thread sleep error");
-            }
-            keepPlaying = engine.tick();
+
+
+           engine.tick();
         }
     }
 

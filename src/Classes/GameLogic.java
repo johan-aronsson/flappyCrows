@@ -27,7 +27,9 @@ public class GameLogic {
 
             }
 
-
+        }
+        if (crowCoordinate.getCoordinate().getY() < 1 || crowCoordinate.getCoordinate().getY() > 39) {
+            return false;
         }
         return true;
 

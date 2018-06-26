@@ -8,6 +8,7 @@ public class GameEngine {
     private Map map;
     private Crow crow;
     private SoundEngine soundEngine;
+    private boolean playerAlive = true;
     public GameEngine(){
         renderer = new Renderer();
         gameLogic = new GameLogic();
@@ -16,14 +17,20 @@ public class GameEngine {
         soundEngine = new SoundEngine();
     }
 
-    public boolean tick() {
-        boolean playerAlive;
-        checkInput();
-        playerAlive = gameLogic.tick(crow,map);
+    public void tick() {
+        while (playerAlive) {
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+                System.out.println("Main thread sleep error");
+            }
+            checkInput();
+            playerAlive = gameLogic.tick(crow, map);
 
-        renderer.renderCrow(crow);
-        renderer.renderMap(map);
-        return playerAlive;
+            renderer.renderCrow(crow);
+            renderer.renderMap(map);
+        }
+        renderer.renderDeathScreen();
     }
 
     private void checkInput() {
