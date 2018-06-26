@@ -4,15 +4,33 @@ import com.googlecode.lanterna.input.Key;
 
 public class GameLogic {
     private Key key;
-    public void tick(Crow crow, Map map) {
-        if(key != null) {
+
+    public boolean tick(Crow crow, Map map) {
+        if (key != null) {
             crow.updateLocation(true);
-        }else{
+        } else {
             crow.updateLocation(false);
         }
         key = null;
 
         map.updateLocation();
+        return checkForCollission(crow, map);
+    }
+
+    private boolean checkForCollission(Crow crowCoordinate, Map map) {
+        for (WallSegment wall : map.getWalls()) {
+            for (Coordinate coor : wall.getWallSegment()) {
+                if (crowCoordinate.getCoordinate().getX() == coor.getX() &&
+                        crowCoordinate.getCoordinate().getY() == coor.getY()) {
+                    return false;
+                }
+
+            }
+
+
+        }
+        return true;
+
     }
 
     public void setKey(Key key) {

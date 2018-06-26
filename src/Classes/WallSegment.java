@@ -12,6 +12,12 @@ public class WallSegment {
         return wallSegment;
     }
 
+    public WallSegment (int x, int y) {
+        Coordinate coord = new Coordinate(x, y);
+        coord.setColor(99);
+        wallSegment.add(coord);
+    }
+
     public WallSegment(int x) {
         int randomNum = randomNum(40);
         for (int y = 0; y < 45; y++) {

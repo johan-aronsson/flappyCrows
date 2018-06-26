@@ -17,11 +17,13 @@ public class GameEngine {
     }
 
     public boolean tick() {
+        boolean playerAlive;
         checkInput();
-        gameLogic.tick(crow,map);
+        playerAlive = gameLogic.tick(crow,map);
+
         renderer.renderCrow(crow);
         renderer.renderMap(map);
-        return true;
+        return playerAlive;
     }
 
     private void checkInput() {

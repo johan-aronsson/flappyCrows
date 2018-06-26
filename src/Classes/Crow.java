@@ -18,7 +18,7 @@ public class Crow extends Drawable{
     }
 
     public Crow () {
-        coordinate = new Coordinate(15, 20, 4);
+        coordinate = new Coordinate(15, 10, 4);
     }
 
     public Coordinate getCoordinate () {
