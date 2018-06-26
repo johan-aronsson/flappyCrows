@@ -17,9 +17,6 @@ public class Map {
             }
 
         }
-
-
-
     }
 
     public List<WallSegment> getWalls() {
@@ -29,7 +26,6 @@ public class Map {
     public void updateLocation() {
         if(updateCounter > 10) {
             int max = walls.get(walls.size()-1).getWallSegment().get(0).getX();
-            System.out.println(max);
             for (int i = 0; i < walls.size();i++) {
                 walls.get(i).moveSegment(max);
             }
@@ -43,7 +39,4 @@ public class Map {
         }
         updateCounter++;
     }
-
-
-
 }
