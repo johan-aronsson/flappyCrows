@@ -5,13 +5,14 @@ public class Main {
     private static GameEngine engine;
     public static void main(String[] arg) {
         initializeGame();
-        while(keepPlaying){
-            try{
+        while (keepPlaying) {
+            try {
                 Thread.sleep(50);
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Main thread sleep error");
+
+                keepPlaying = engine.tick();
             }
-            keepPlaying = engine.tick();
         }
     }
 
