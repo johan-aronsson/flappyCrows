@@ -11,4 +11,6 @@ public class GameLogic {
     public void setKey(Key key) {
         this.key = key;
     }
+
+
 }
