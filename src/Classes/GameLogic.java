@@ -11,6 +11,8 @@ public class GameLogic {
             crow.updateLocation(false);
         }
         key = null;
+
+        map.updateLocation();
     }
 
     public void setKey(Key key) {

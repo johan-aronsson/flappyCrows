@@ -17,8 +17,16 @@ public class WallSegment {
             coord.setColor(99);
             wallSegment.add(coord);
 
-
         }
 
+    }
+
+    public void moveSegment() {
+        for(Coordinate coor : wallSegment)
+            if(coor.getX() == 0){
+                coor.move(50,0);
+            }else {
+                coor.move(-1, 0);
+            }
     }
 }
