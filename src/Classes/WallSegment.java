@@ -2,6 +2,7 @@ package Classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class WallSegment {
 
@@ -12,21 +13,30 @@ public class WallSegment {
     }
 
     public WallSegment(int x) {
+        int randomNum = randomNum(40);
         for (int y = 0; y < 45; y++) {
-            Coordinate coord = new Coordinate(x, y);
-            coord.setColor(99);
-            wallSegment.add(coord);
+            if (!(y>randomNum && y<randomNum+5)) {
+                Coordinate coord = new Coordinate(x, y);
+                coord.setColor(99);
+                wallSegment.add(coord);
+            }
 
         }
 
     }
 
-    public void moveSegment() {
-        for(Coordinate coor : wallSegment)
-            if(coor.getX() == 0){
-                coor.move(50,0);
+    public void moveSegment(int max) {
+        for(int i = 0; i<wallSegment.size(); i++)
+            if(wallSegment.get(i).getX() == 0){
+                wallSegment.get(i).move(max+4, 0);
             }else {
-                coor.move(-1, 0);
+                wallSegment.get(i).move(-1, 0);
             }
+    }
+
+    public int randomNum (int bound) {
+        Random rand = new Random();
+        return rand.nextInt(bound);
+
     }
 }

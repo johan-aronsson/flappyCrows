@@ -10,8 +10,16 @@ public class Map {
     private int updateCounter = 0;
 
     public Map() {
-        WallSegment ws = new WallSegment(4);
-        walls.add(ws);
+        for (int i = 0; i < 100; i++) {
+            if (i%3==0) {
+                WallSegment ws = new WallSegment(i);
+                walls.add(ws);
+            }
+
+        }
+
+
+
     }
 
     public List<WallSegment> getWalls() {
@@ -21,7 +29,7 @@ public class Map {
     public void updateLocation() {
         if(updateCounter > 10) {
             for (WallSegment ws : walls) {
-                ws.moveSegment();
+                ws.moveSegment(walls.get(walls.size()-1).getWallSegment().get(0).getX());
             }
             WallSegment temp = walls.get(0);
             walls.remove(0);
