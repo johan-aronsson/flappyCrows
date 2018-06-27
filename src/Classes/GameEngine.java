@@ -84,14 +84,20 @@ public class GameEngine {
     }
 
     private void checkHighScore() {
+        boolean highscoreAdded = false;
         if(highScore.size() > 0){
             for(int i = 0; i< highScore.size();i++){
-                if(crow.getScore() >= i){
+                if(crow.getScore() >= highScore.get(i)){
                     highScore.add(i, crow.getScore());
                     i = highScore.size();
+                    highscoreAdded = true;
                 }
             }
         }else{
+            highScore.add(crow.getScore());
+            highscoreAdded = true;
+        }
+        if(!highscoreAdded){
             highScore.add(crow.getScore());
         }
         StringBuilder highScoreString = new StringBuilder();
@@ -118,7 +124,7 @@ public class GameEngine {
         key = renderer.getTerminal().readInput();
         if (key != null) {
             try {
-                Thread.sleep(1);
+                Thread.sleep(5);
             } catch (Exception e) {
                 System.out.println("Thread issue");
             }
