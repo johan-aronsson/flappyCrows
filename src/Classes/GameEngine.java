@@ -2,8 +2,14 @@ package Classes;
 
 import com.googlecode.lanterna.input.Key;
 
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameEngine {
     private Renderer renderer;
@@ -13,7 +19,7 @@ public class GameEngine {
     private SoundEngine soundEngine;
     private boolean playerAlive = true;
     private boolean gameOn = true;
-    private String filepath = "C:/Users/Administrator/Documents/Java/flappyCrows/Resource/";
+    private String filepath = "Resource/";//"C:/Users/Administrator/Documents/Java/flappyCrows/Resource/";
     private int oldScore = 0;
     private List<Integer> highScore = new ArrayList<>();
 
@@ -24,6 +30,22 @@ public class GameEngine {
         map = new Map();
         soundEngine = new SoundEngine();
         soundEngine.play(filepath + "8-bit-music.mp3", true);
+        if(Files.exists(Paths.get(filepath+"/score.txt"))){
+            try {
+                Scanner sc = new Scanner(Paths.get(filepath + "/score.txt"));
+                while(sc.hasNext()){
+                    highScore.add(sc.nextInt());
+
+                }
+            }catch(Exception e){
+                System.out.println("IO EXCEPTION!");
+            }
+
+            for(int i : highScore){
+                System.out.println(i);
+            }
+
+        }
     }
 
     public void tick() {
@@ -54,8 +76,33 @@ public class GameEngine {
             } catch (Exception e) {
                 System.out.println("Main thread sleep error");
             }
-            soundEngine.play(filepath + "sfx_die.wav");
+            soundEngine.play( filepath + "sfx_die.wav");
+
+            checkHighScore();
             gameOn = false;
+        }
+    }
+
+    private void checkHighScore() {
+        if(highScore.size() > 0){
+            for(int i = 0; i< highScore.size();i++){
+                if(crow.getScore() >= i){
+                    highScore.add(i, crow.getScore());
+                    i = highScore.size();
+                }
+            }
+        }else{
+            highScore.add(crow.getScore());
+        }
+        StringBuilder highScoreString = new StringBuilder();
+        for(int i : highScore){
+            highScoreString = highScoreString.append(i +"\n");
+        }
+        String scoreString = highScoreString.toString();
+        try {
+            Files.write(Paths.get(filepath + "score.txt"), scoreString.getBytes(), StandardOpenOption.CREATE);
+        }catch(Exception e){
+            System.out.println("File write exception");
         }
     }
 
