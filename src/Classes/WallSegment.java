@@ -8,8 +8,6 @@ public class WallSegment {
 
     private List<Coordinate> wallSegment = new ArrayList<>();
     private int holeStart;
-    private boolean moveDown;
-
 
     public List<Coordinate> getWallSegment() {
         return wallSegment;
@@ -43,26 +41,11 @@ public class WallSegment {
                     }else if(wallSegment.get(i).getY() == holeStart+6){
                         wallSegment.get(i).move(0,-6);
                     }
-                    /*int y;
-                    if(wallSegment.get(0).getY() == 0){
-                        goingDown = false;
-                        y = -1;
-                    }else if(wallSegment.get(0).getY() == -3){
-                        goingDown = true;
-                        y = 1;
-                    }else if(goingDown){
-                        y = 1;
-                    }else{
-                        y = -1;
-                    }
-                    wallSegment.get(i).move(0, y);*/
-                //}
             }
     }
 
     public int randomNum (int bound) {
         Random rand = new Random();
         return rand.nextInt(bound);
-
     }
 }
