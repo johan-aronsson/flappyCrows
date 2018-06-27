@@ -118,7 +118,7 @@ public class GameEngine {
         key = renderer.getTerminal().readInput();
         if (key != null) {
             try {
-                Thread.sleep(5);
+                Thread.sleep(1);
             } catch (Exception e) {
                 System.out.println("Thread issue");
             }
