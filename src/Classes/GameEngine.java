@@ -36,7 +36,7 @@ public class GameEngine {
         if(Files.exists(Paths.get(filepath+"/score.txt"))){
             try {
                 Scanner sc = new Scanner(Paths.get(filepath + "/score.txt"));
-                while(sc.hasNext()){
+                while(sc.hasNextInt()){
                     highScore.add(sc.nextInt());
                 }
             }catch(Exception e){
@@ -53,10 +53,20 @@ public class GameEngine {
     public void tick() {
         if (gameOn) {
             while(inMenu){
+                try {
+                    Thread.sleep(50);
+                } catch (Exception e) {
+                    System.out.println("Main thread sleep error");
+                }
                 renderer.render(menu);
                 Key key;
                 key = renderer.getTerminal().readInput();
                 if(key != null){
+                    try {
+                        Thread.sleep(4);
+                    } catch (Exception e) {
+                        System.out.println("Thread issue");
+                    }
                     if(key.getKind() == Key.Kind.ArrowUp){
                         menu.goUp();
 
@@ -120,7 +130,7 @@ public class GameEngine {
             highScore.add(crow.getScore());
         }
         StringBuilder highScoreString = new StringBuilder();
-        for(int i : highScore){
+        for(int i = 0; i<3;i++){
             highScoreString = highScoreString.append(i +"\n");
         }
         String scoreString = highScoreString.toString();
