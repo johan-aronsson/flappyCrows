@@ -10,6 +10,7 @@ public class Map {
     private List<WallSegment> floorAndRoof = new ArrayList<>();
 
     private int updateCounter = 0;
+    private int speed = 0;
 
     public Map() {
         for (int i = 0; i <= 100; i++) {
@@ -32,6 +33,9 @@ public class Map {
             for (int i = 0; i < walls.size(); i++) {
                 if(crow.getCoordinate().getX() == walls.get(i).getWallSegment().get(1).getX()){
                     crow.addScore(1);
+                    if (crow.getScore()%3 == 0 && speed<8) {
+                        speed++;
+                    }
                 }
                 walls.get(i).moveSegment(max);
 
@@ -43,9 +47,11 @@ public class Map {
                 walls.add(temp);
 
             }
-            updateCounter = 0;
+
+            updateCounter = speed;
         }
         updateCounter++;
+
     }
 
     public List<WallSegment> getWalls() {

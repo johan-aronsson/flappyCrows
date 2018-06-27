@@ -1,7 +1,7 @@
 package Classes;
 
 
-public class Crow extends Drawable{
+public class Crow {
 
     private Coordinate coordinate;
     private int countUpdateLocation = 0;
