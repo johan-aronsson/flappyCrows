@@ -32,14 +32,16 @@ public class Crow {
             for(int i = 0; i<figure.size();i++){
                 figure.get(i).move(0,-1);
             }
-            figure.get(0).setColor(0);
+            figure.get(0).setColor(4);
+            figure.get(1).setColor(4);
             countUpdateLocation = 0;
             acceleration = 1;
         } else if (countUpdateLocation > 3) {
             for(int i = 0;i<figure.size();i++){
                 figure.get(i).move(0,acceleration);
             }
-            figure.get(0).setColor(1);
+            figure.get(0).setColor(0);
+            figure.get(1).setColor(0);
             coordinate.move(0, acceleration++);
 
             countUpdateLocation = 0;
