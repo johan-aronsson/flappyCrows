@@ -1,29 +1,29 @@
 package Classes;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Map {
-
     private List<WallSegment> walls = new ArrayList<>();
     private List<WallSegment> floorAndRoof = new ArrayList<>();
-
     private int updateCounter = 0;
     private int speed = 0;
 
     public Map() {
-        for (int i = 0; i <= 100; i++) {
+        WallSegment ws = new WallSegment(0, 0);
+        floorAndRoof.add(ws);
+        WallSegment ws2 = new WallSegment(0, 30);
+        floorAndRoof.add(ws2);
+        for (int i = 1; i <= 100; i++) {
             if (i % 10 == 0) {
-                WallSegment ws = new WallSegment(i);
+                ws = new WallSegment(i);
                 walls.add(ws);
             }
 
-            WallSegment ws = new WallSegment(i, 0);
+            ws = new WallSegment(i, 0);
             floorAndRoof.add(ws);
-            WallSegment ws2 = new WallSegment(i, 30);
+            ws2 = new WallSegment(i, 30);
             floorAndRoof.add(ws2);
-
         }
     }
 
@@ -42,17 +42,14 @@ public class Map {
             }
 
             if (walls.get(0).getWallSegment().get(4).getX() <= 0) {
-                //WallSegment temp = walls.get(0);
                 walls.get(0).getWallSegment().clear();
                 walls.remove(0);
-                walls.add(new WallSegment(max+3));
-
+                walls.add(new WallSegment(max));
             }
 
             updateCounter = speed;
         }
         updateCounter++;
-
     }
 
     public List<WallSegment> getWalls() {
@@ -61,7 +58,4 @@ public class Map {
     public List<WallSegment> getFloorAndRoof() {
         return floorAndRoof;
     }
-
-
-
 }
