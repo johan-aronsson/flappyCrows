@@ -1,13 +1,10 @@
 package Classes;
 
-import com.googlecode.lanterna.terminal.TerminalSize;
-
 public class Coordinate {
     private int x;
     private int y;
     private int color;
-
-
+    
     public Coordinate(int x, int y, int color) {
         setX(x);
         setY(y);
