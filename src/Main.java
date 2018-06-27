@@ -10,8 +10,6 @@ public class Main {
 
     private static void doGameLoop() {
         while (keepPlaying) {
-
-
            engine.tick();
         }
     }
