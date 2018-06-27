@@ -63,6 +63,7 @@ public class Renderer {
                 terminal.applyBackgroundColor(coor.getColor());
                 terminal.moveCursor(coor.getX(), coor.getY());
                 terminal.putCharacter(' ');
+
             }
 
         }
