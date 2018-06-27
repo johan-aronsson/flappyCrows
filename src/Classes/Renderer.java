@@ -65,7 +65,7 @@ public class Renderer {
         terminal.applyBackgroundColor(13);
         String gameOver = "Game Over";
         for (int i = 0; i <gameOver.length() ; i++) {
-            terminal.moveCursor(30+i,20);
+            terminal.moveCursor(terminalSizes.getColumns()/2+i,terminalSizes.getRows()/2);
             terminal.putCharacter(gameOver.charAt(i));
         }
     }
