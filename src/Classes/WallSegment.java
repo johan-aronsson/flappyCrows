@@ -7,6 +7,7 @@ import java.util.Random;
 public class WallSegment {
 
     private List<Coordinate> wallSegment = new ArrayList<>();
+    //private boolean goingDown;
 
 
     public List<Coordinate> getWallSegment() {
@@ -29,17 +30,29 @@ public class WallSegment {
             }
 
         }
-
     }
 
     public void moveSegment(int max) {
         for(int i = 0; i<wallSegment.size(); i++)
             if(wallSegment.get(i).getY() != 0 && wallSegment.get(i).getY() != 40) {
-                if (wallSegment.get(i).getX() == 0) {
-                    wallSegment.get(i).move((max + 4), 0);
-                } else {
+                //if (wallSegment.get(i).getX() == 0) {
+                  //  wallSegment.get(i).move((max + 4), 0);
+                //} else {
                     wallSegment.get(i).move(-1, 0);
-                }
+                    /*int y;
+                    if(wallSegment.get(0).getY() == 0){
+                        goingDown = false;
+                        y = -1;
+                    }else if(wallSegment.get(0).getY() == -3){
+                        goingDown = true;
+                        y = 1;
+                    }else if(goingDown){
+                        y = 1;
+                    }else{
+                        y = -1;
+                    }
+                    wallSegment.get(i).move(0, y);*/
+                //}
             }
     }
 

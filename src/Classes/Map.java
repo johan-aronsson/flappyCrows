@@ -41,10 +41,11 @@ public class Map {
 
             }
 
-            if (walls.get(0).getWallSegment().get(0).getX() > 4) {
-                WallSegment temp = walls.get(0);
+            if (walls.get(0).getWallSegment().get(4).getX() <= 0) {
+                //WallSegment temp = walls.get(0);
+                walls.get(0).getWallSegment().clear();
                 walls.remove(0);
-                walls.add(temp);
+                walls.add(new WallSegment(max+3));
 
             }
 
