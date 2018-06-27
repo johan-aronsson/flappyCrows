@@ -52,6 +52,9 @@ public class Renderer {
     public void render(Menu menu){
         for(Coordinate c: menu.getCoordinates()){
             terminal.applyBackgroundColor(1);
+            if(menu.getHighLightedRow() == c.getY()){
+                terminal.applyBackgroundColor((2));
+            }
             terminal.moveCursor(c.getX(),c.getY());
             terminal.putCharacter(' ');
         }
