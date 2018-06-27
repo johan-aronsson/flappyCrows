@@ -22,6 +22,8 @@ public class GameEngine {
     private String filepath = "Resource/";//"C:/Users/Administrator/Documents/Java/flappyCrows/Resource/";
     private int oldScore = 0;
     private List<Integer> highScore = new ArrayList<>();
+    private Menu menu;
+    private boolean inMenu = true;
 
     public GameEngine() {
         renderer = new Renderer();
@@ -29,13 +31,13 @@ public class GameEngine {
         crow = new Crow();
         map = new Map();
         soundEngine = new SoundEngine();
+        menu = new Menu();
         soundEngine.play(filepath + "8-bit-music.mp3", true);
         if(Files.exists(Paths.get(filepath+"/score.txt"))){
             try {
                 Scanner sc = new Scanner(Paths.get(filepath + "/score.txt"));
                 while(sc.hasNext()){
                     highScore.add(sc.nextInt());
-
                 }
             }catch(Exception e){
                 System.out.println("IO EXCEPTION!");
@@ -50,6 +52,23 @@ public class GameEngine {
 
     public void tick() {
         if (gameOn) {
+            while(inMenu){
+                renderer.render(menu);
+                Key key;
+                key = renderer.getTerminal().readInput();
+                if(key != null){
+                    if(key.getKind() == Key.Kind.ArrowUp){
+                        menu.goUp();
+
+                    }else if(key.getKind() == Key.Kind.ArrowDown){
+                        menu.goDown();
+
+                    }else if(key.getKind() == Key.Kind.Enter && menu.currentChoice().equals("Start Game")){
+                        inMenu = false;
+                    }
+                }
+            }
+
             while (playerAlive) {
                 try {
                     Thread.sleep(50);

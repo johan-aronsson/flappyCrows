@@ -28,6 +28,7 @@ public class Renderer {
         terminal.applyBackgroundColor(crow.getCoordinate().getColor());
         terminal.moveCursor(crow.getCoordinate().getX(), crow.getCoordinate().getY());
         terminal.putCharacter(' ');
+        renderCrow(crow);
 
 
         renderMap(map);
@@ -37,6 +38,23 @@ public class Renderer {
             terminal.putCharacter(score.charAt(i));
         }
         //}
+    }
+
+    private void renderCrow(Crow crow) {
+        for(int i = 0; i<crow.getFigure().size();i++){
+            Coordinate current = crow.getFigure().get(i);
+            terminal.applyBackgroundColor(current.getColor());
+            terminal.moveCursor(current.getX(),current.getY());
+            terminal.putCharacter(' ');
+        }
+    }
+
+    public void render(Menu menu){
+        for(Coordinate c: menu.getCoordinates()){
+            terminal.applyBackgroundColor(1);
+            terminal.moveCursor(c.getX(),c.getY());
+            terminal.putCharacter(' ');
+        }
     }
 
     public void renderMap(Map map) {
