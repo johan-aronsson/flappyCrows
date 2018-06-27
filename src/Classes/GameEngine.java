@@ -15,6 +15,7 @@ public class GameEngine {
         crow = new Crow();
         map = new Map();
         soundEngine = new SoundEngine();
+        soundEngine.play("C:/Users/Administrator/Documents/Java/flappyCrows/Resource/8-bit-music.mp3");
     }
 
     public void tick() {
@@ -29,6 +30,7 @@ public class GameEngine {
             renderer.render(crow, map);
         }
         renderer.renderDeathScreen();
+        soundEngine.stopAll();
     }
 
     private void checkInput() {
