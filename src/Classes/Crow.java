@@ -13,7 +13,7 @@ public class Crow {
     private List<Coordinate> figure = new ArrayList<>();
 
     public Crow () {
-        coordinate = new Coordinate(15, 10, 4);
+        coordinate = new Coordinate(15, 10, 2);
         initializeFigure();
     }
 
