@@ -43,11 +43,6 @@ public class GameEngine {
             }catch(Exception e){
                 System.out.println("IO EXCEPTION!");
             }
-
-            for(int i : highScore){
-                System.out.println(i);
-            }
-
         }
     }
 
@@ -90,11 +85,9 @@ public class GameEngine {
                                 map = new Map();
                                 break;
                             case "HighScore":
-                                System.out.println("Render highscore");
                                 showHighScore = true;
                                 break;
                             case "Quit Game":
-                                System.out.println("Stänger av spelet");
                                 System.exit(0);
                                 break;
                         }
@@ -130,9 +123,6 @@ public class GameEngine {
             soundEngine.play( filepath + "sfx_die.wav");
 
             checkHighScore();
-            for(int i : highScore){
-                System.out.println(i);
-            }
             inMenu = true;
         }
     }
