@@ -63,7 +63,7 @@ public class GameEngine {
                 if(showHighScore){
                     renderer.renderHighScore(highScore);
                 }
-                if(playerAlive == false){
+                if(!playerAlive){
                     renderer.renderDeathScreen();
                 }
                 Key key;
@@ -86,6 +86,8 @@ public class GameEngine {
                                 playerAlive = true;
                                 inMenu = false;
                                 showHighScore = false;
+                                crow = new Crow();
+                                map = new Map();
                                 break;
                             case "HighScore":
                                 System.out.println("Render highscore");
@@ -128,6 +130,9 @@ public class GameEngine {
             soundEngine.play( filepath + "sfx_die.wav");
 
             checkHighScore();
+            for(int i : highScore){
+                System.out.println(i);
+            }
             inMenu = true;
         }
     }
@@ -136,17 +141,20 @@ public class GameEngine {
         boolean highscoreAdded = false;
         if(highScore.size() > 0){
             for(int i = 0; i< highScore.size();i++){
-                if(crow.getScore() >= highScore.get(i)){
+                if(crow.getScore() > highScore.get(i)){
                     highScore.add(i, crow.getScore());
-                    i = highScore.size();
+                    //i = highScore.size();
                     highscoreAdded = true;
+                    if(highScore.size()==4) {
+                        highScore.remove(highScore.size() - 1);
+                    }
+                    break;
                 }
             }
+            if(highScore.size() <3 && !highscoreAdded){
+                highScore.add(crow.getScore());
+            }
         }else{
-            highScore.add(crow.getScore());
-            highscoreAdded = true;
-        }
-        if(!highscoreAdded){
             highScore.add(crow.getScore());
         }
         StringBuilder highScoreString = new StringBuilder();

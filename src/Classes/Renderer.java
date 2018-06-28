@@ -74,6 +74,7 @@ public class Renderer {
                     scoreCounter = 0;
                     scoreDone=true;
                 }
+
             }else if(c.getY() == (Renderer.terminalSizes.getRows()/2)-4 && !quitDone){
                 terminal.putCharacter(quit.charAt(quitCounter++));
                 if(quitCounter == quit.length()){
@@ -113,16 +114,16 @@ public class Renderer {
         terminal.applyBackgroundColor(1);
         String gameOver = "Game Over";
         for (int i = 0; i <gameOver.length() ; i++) {
-            terminal.moveCursor(terminalSizes.getColumns()/2+i-5,terminalSizes.getRows()/2);
+            terminal.moveCursor(terminalSizes.getColumns()/2+i-5,terminalSizes.getRows()/2-1);
             terminal.putCharacter(gameOver.charAt(i));
         }
     }
 
     public void renderHighScore(List<Integer> highscore) {
-        for(int i = 0; i <highscore.size();i++) {
+        for(int i = highscore.size()-1; i >=0;i--) {
             String score = highscore.get(i).toString();
             for (int j = 0; j < score.length(); j++) {
-                terminal.moveCursor(Renderer.terminalSizes.getColumns() / 2 + j, Renderer.terminalSizes.getRows() / 2 + i);
+                terminal.moveCursor(Renderer.terminalSizes.getColumns() / 2 + j, Renderer.terminalSizes.getRows() / 2 + 2-i);
                 terminal.putCharacter(score.charAt(j));
             }
         }
