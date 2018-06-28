@@ -3,45 +3,33 @@ package Classes;
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalSize;
-
 import java.nio.charset.Charset;
 import java.util.List;
 
 
 public class Renderer {
     private static Terminal terminal;
-
     public static TerminalSize terminalSizes;
-
-    //public static Coordinate windowMax;
 
     public Renderer() {
         terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF8"));
         terminal.enterPrivateMode();
         terminal.setCursorVisible(false);
         terminalSizes = terminal.getTerminalSize();
-        // windowMax = new Coordinate(terminal.getTerminalSize().getColumns(), terminal.getTerminalSize().getRows());
     }
 
-    public void render(Crow crow, Map map) {
+    public void renderGame(Crow crow, Map map) {
         terminal.clearScreen();
-        //for (Drawable g : objects) {
-        terminal.applyBackgroundColor(crow.getCoordinate().getColor());
-        terminal.moveCursor(crow.getCoordinate().getX(), crow.getCoordinate().getY());
-        terminal.putCharacter(' ');
         renderCrow(crow);
-
-
         renderMap(map);
-        String score = "" + crow.getScore();
-        for(int i = 0; i < score.length(); i++){
-            terminal.moveCursor(5+i,0);
-            terminal.putCharacter(score.charAt(i));
-        }
-        //}
+        renderScore(crow);
     }
 
     private void renderCrow(Crow crow) {
+        terminal.applyBackgroundColor(crow.getCoordinate().getColor());
+        terminal.moveCursor(crow.getCoordinate().getX(), crow.getCoordinate().getY());
+        terminal.putCharacter(' ');
+
         for(int i = 0; i<crow.getFigure().size();i++){
             Coordinate current = crow.getFigure().get(i);
             terminal.applyBackgroundColor(current.getColor());
@@ -50,7 +38,32 @@ public class Renderer {
         }
     }
 
-    public void render(Menu menu){
+    private void renderMap(Map map) {
+        for (int i = 0; i < map.getWalls().size(); i++) {
+            for (Coordinate coor : map.getWalls().get(i).getWallSegment()) {
+                terminal.applyBackgroundColor(coor.getColor());
+                terminal.moveCursor(coor.getX(), coor.getY());
+                terminal.putCharacter(' ');
+            }
+        }
+        for (int i = 0; i < map.getFloorAndRoof().size(); i++) {
+            for (Coordinate coor : map.getFloorAndRoof().get(i).getWallSegment()) {
+                terminal.applyBackgroundColor(coor.getColor());
+                terminal.moveCursor(coor.getX(), coor.getY());
+                terminal.putCharacter(' ');
+            }
+        }
+    }
+
+    private void renderScore(Crow crow) {
+        String score = "" + crow.getScore();
+        for(int i = 0; i < score.length(); i++){
+            terminal.moveCursor(5+i,0);
+            terminal.putCharacter(score.charAt(i));
+        }
+    }
+
+    public void renderMenu(Menu menu){
         String start = "Start Game";
         String highScore = "Show HighScore";
         String quit = "Quit Game";
@@ -74,6 +87,7 @@ public class Renderer {
                     scoreCounter = 0;
                     scoreDone=true;
                 }
+
             }else if(c.getY() == (Renderer.terminalSizes.getRows()/2)-4 && !quitDone){
                 terminal.putCharacter(quit.charAt(quitCounter++));
                 if(quitCounter == quit.length()){
@@ -81,25 +95,6 @@ public class Renderer {
                     quitDone=true;
                 }
             }else{
-                terminal.putCharacter(' ');
-            }
-        }
-    }
-
-    public void renderMap(Map map) {
-        for (int i = 0; i < map.getWalls().size(); i++) {
-            for (Coordinate coor : map.getWalls().get(i).getWallSegment()) {
-                terminal.applyBackgroundColor(coor.getColor());
-                terminal.moveCursor(coor.getX(), coor.getY());
-                terminal.putCharacter(' ');
-
-            }
-
-        }
-        for (int i = 0; i < map.getFloorAndRoof().size(); i++) {
-            for (Coordinate coor : map.getFloorAndRoof().get(i).getWallSegment()) {
-                terminal.applyBackgroundColor(coor.getColor());
-                terminal.moveCursor(coor.getX(), coor.getY());
                 terminal.putCharacter(' ');
             }
         }
@@ -113,16 +108,16 @@ public class Renderer {
         terminal.applyBackgroundColor(1);
         String gameOver = "Game Over";
         for (int i = 0; i <gameOver.length() ; i++) {
-            terminal.moveCursor(terminalSizes.getColumns()/2+i-5,terminalSizes.getRows()/2);
+            terminal.moveCursor(terminalSizes.getColumns()/2+i-5,terminalSizes.getRows()/2-1);
             terminal.putCharacter(gameOver.charAt(i));
         }
     }
 
     public void renderHighScore(List<Integer> highscore) {
-        for(int i = 0; i <highscore.size();i++) {
+        for(int i = highscore.size()-1; i >=0;i--) {
             String score = highscore.get(i).toString();
             for (int j = 0; j < score.length(); j++) {
-                terminal.moveCursor(Renderer.terminalSizes.getColumns() / 2 + j, Renderer.terminalSizes.getRows() / 2 + i);
+                terminal.moveCursor(Renderer.terminalSizes.getColumns() / 2 + j, Renderer.terminalSizes.getRows() / 2 + 2-i);
                 terminal.putCharacter(score.charAt(j));
             }
         }

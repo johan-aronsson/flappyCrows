@@ -14,10 +14,10 @@ public class GameLogic {
         key = null;
 
         map.updateLocation(crow);
-        return checkForCollission(crow, map);
+        return checkForCollision(crow, map);
     }
 
-    private boolean checkForCollission(Crow crowCoordinate, Map map) {
+    private boolean checkForCollision(Crow crowCoordinate, Map map) {
         for (WallSegment wall : map.getWalls()) {
             for (Coordinate coor : wall.getWallSegment()) {
                 if (crowCoordinate.getCoordinate().getX() == coor.getX() &&
