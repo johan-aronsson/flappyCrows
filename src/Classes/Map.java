@@ -31,25 +31,35 @@ public class Map {
         if (updateCounter > 10) {
             int max = walls.get(walls.size() - 1).getWallSegment().get(0).getX();
             for (int i = 0; i < walls.size(); i++) {
-                if(crow.getCoordinate().getX() == walls.get(i).getWallSegment().get(1).getX()){
-                    crow.addScore(1);
-                    if (crow.getScore()%3 == 0 && speed<8) {
-                        speed++;
-                    }
-                }
+                updateScoreAndSpeed(crow, i);
                 walls.get(i).moveSegment(max);
-
             }
-
-            if (walls.get(0).getWallSegment().get(4).getX() <= 0) {
-                walls.get(0).getWallSegment().clear();
-                walls.remove(0);
-                walls.add(new WallSegment(max));
-            }
+            checkAndUpdateWalls(max);
 
             updateCounter = speed;
         }
         updateCounter++;
+    }
+
+    private void updateScoreAndSpeed(Crow crow, int i) {
+        if(crow.getCoordinate().getX() == walls.get(i).getWallSegment().get(1).getX()){
+            crow.addScore(1);
+            checkAndUpdateSpeed(crow);
+        }
+    }
+
+    private void checkAndUpdateSpeed(Crow crow) {
+        if (crow.getScore()%3 == 0 && speed<8) {
+            speed++;
+        }
+    }
+
+    private void checkAndUpdateWalls(int max) {
+        if (walls.get(0).getWallSegment().get(4).getX() <= 0) {
+            walls.get(0).getWallSegment().clear();
+            walls.remove(0);
+            walls.add(new WallSegment(max));
+        }
     }
 
     public List<WallSegment> getWalls() {
