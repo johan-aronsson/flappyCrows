@@ -1,12 +1,9 @@
 package Classes;
 
 import com.googlecode.lanterna.input.Key;
-
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -49,11 +46,7 @@ public class GameEngine {
     public void tick() {
         if (gameOn) {
             while(inMenu){
-                try {
-                    Thread.sleep(50);
-                } catch (Exception e) {
-                    System.out.println("Main thread sleep error");
-                }
+                delay(50);
                 renderer.render(menu);
                 if(showHighScore){
                     renderer.renderHighScore(highScore);
@@ -64,11 +57,7 @@ public class GameEngine {
                 Key key;
                 key = renderer.getTerminal().readInput();
                 if(key != null){
-                    try {
-                        Thread.sleep(4);
-                    } catch (Exception e) {
-                        System.out.println("Thread issue");
-                    }
+                    delay(4);
                     if(key.getKind() == Key.Kind.ArrowUp){
                         menu.goUp();
 
@@ -96,11 +85,7 @@ public class GameEngine {
             }
 
             while (playerAlive) {
-                try {
-                    Thread.sleep(50);
-                } catch (Exception e) {
-                    System.out.println("Main thread sleep error");
-                }
+                delay(50);
 
                 checkInput();
                 playerAlive = gameLogic.tick(crow, map);
@@ -109,21 +94,21 @@ public class GameEngine {
                 checkScoreChanged();
             }
             soundEngine.stopAll();
-            try {
-                Thread.sleep(5);
-            } catch (Exception e) {
-                System.out.println("Main thread sleep error");
-            }
+            delay(5);
             soundEngine.play(filepath + "sfx_hit.wav");
-            try {
-                Thread.sleep(10);
-            } catch (Exception e) {
-                System.out.println("Main thread sleep error");
-            }
+            delay(10);
             soundEngine.play( filepath + "sfx_die.wav");
 
             checkHighScore();
             inMenu = true;
+        }
+    }
+
+    private void delay(int delay) {
+        try {
+            Thread.sleep(delay);
+        } catch (Exception e) {
+            System.out.println("thread sleep error");
         }
     }
 
@@ -170,11 +155,7 @@ public class GameEngine {
         Key key;
         key = renderer.getTerminal().readInput();
         if (key != null) {
-            try {
-                Thread.sleep(4);
-            } catch (Exception e) {
-                System.out.println("Thread issue");
-            }
+            delay(4);
             soundEngine.play(filepath + "sfx_wing.wav");
             gameLogic.setKey(key);
         }
