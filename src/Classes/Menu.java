@@ -24,19 +24,27 @@ public class Menu {
     public void goUp() {
         highLightedRow -=2;
         if(highLightedRow ==start.getY()){
-            highLightedRow = start.getY()+8;
+            highLightedRow = start.getY()+6;
         }
     }
 
     public void goDown() {
         highLightedRow +=2;
-        if(highLightedRow ==start.getY()+10){
+        if(highLightedRow ==start.getY()+8){
             highLightedRow = start.getY() + 2;
         }
     }
 
     public String currentChoice() {
-        return "Start Game";
+        if(highLightedRow == start.getY()+2) {
+            return "Start Game";
+        }else if(highLightedRow == start.getY()+4){
+            return "HighScore";
+        }else if(highLightedRow == start.getY()+6){
+            return "Quit Game";
+        }else {
+            return "";
+        }
     }
 
     public List<Coordinate> getCoordinates(){

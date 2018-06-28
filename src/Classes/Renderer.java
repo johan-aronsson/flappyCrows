@@ -5,6 +5,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalSize;
 
 import java.nio.charset.Charset;
+import java.util.List;
 
 
 public class Renderer {
@@ -50,13 +51,38 @@ public class Renderer {
     }
 
     public void render(Menu menu){
+        String start = "Start Game";
+        String highScore = "Show HighScore";
+        String quit = "Quit Game";
+        boolean startDone = false,scoreDone=false,quitDone=false;
+        int startCounter = 0,scoreCounter=0,quitCounter=0;
         for(Coordinate c: menu.getCoordinates()){
             terminal.applyBackgroundColor(1);
             if(menu.getHighLightedRow() == c.getY()){
                 terminal.applyBackgroundColor((2));
             }
             terminal.moveCursor(c.getX(),c.getY());
-            terminal.putCharacter(' ');
+            if(c.getY()== (Renderer.terminalSizes.getRows()/2)-8 && !startDone){
+                terminal.putCharacter(start.charAt(startCounter++));
+                if(startCounter == start.length()){
+                    startCounter = 0;
+                    startDone = true;
+                }
+            }else if(c.getY() == (Renderer.terminalSizes.getRows()/2)-6 && !scoreDone){
+                terminal.putCharacter(highScore.charAt(scoreCounter++));
+                if(scoreCounter == highScore.length()){
+                    scoreCounter = 0;
+                    scoreDone=true;
+                }
+            }else if(c.getY() == (Renderer.terminalSizes.getRows()/2)-4 && !quitDone){
+                terminal.putCharacter(quit.charAt(quitCounter++));
+                if(quitCounter == quit.length()){
+                    quitCounter = 0;
+                    quitDone=true;
+                }
+            }else{
+                terminal.putCharacter(' ');
+            }
         }
     }
 
@@ -84,11 +110,21 @@ public class Renderer {
     }
 
     public void renderDeathScreen() {
-        terminal.applyBackgroundColor(13);
+        terminal.applyBackgroundColor(1);
         String gameOver = "Game Over";
         for (int i = 0; i <gameOver.length() ; i++) {
-            terminal.moveCursor(terminalSizes.getColumns()/2+i,terminalSizes.getRows()/2);
+            terminal.moveCursor(terminalSizes.getColumns()/2+i-5,terminalSizes.getRows()/2);
             terminal.putCharacter(gameOver.charAt(i));
+        }
+    }
+
+    public void renderHighScore(List<Integer> highscore) {
+        for(int i = 0; i <highscore.size();i++) {
+            String score = highscore.get(i).toString();
+            for (int j = 0; j < score.length(); j++) {
+                terminal.moveCursor(Renderer.terminalSizes.getColumns() / 2 + j, Renderer.terminalSizes.getRows() / 2 + i);
+                terminal.putCharacter(score.charAt(j));
+            }
         }
     }
 }

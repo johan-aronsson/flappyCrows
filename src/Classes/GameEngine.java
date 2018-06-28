@@ -24,6 +24,7 @@ public class GameEngine {
     private List<Integer> highScore = new ArrayList<>();
     private Menu menu;
     private boolean inMenu = true;
+    private boolean showHighScore;
 
     public GameEngine() {
         renderer = new Renderer();
@@ -59,6 +60,12 @@ public class GameEngine {
                     System.out.println("Main thread sleep error");
                 }
                 renderer.render(menu);
+                if(showHighScore){
+                    renderer.renderHighScore(highScore);
+                }
+                if(playerAlive == false){
+                    renderer.renderDeathScreen();
+                }
                 Key key;
                 key = renderer.getTerminal().readInput();
                 if(key != null){
@@ -73,8 +80,22 @@ public class GameEngine {
                     }else if(key.getKind() == Key.Kind.ArrowDown){
                         menu.goDown();
 
-                    }else if(key.getKind() == Key.Kind.Enter && menu.currentChoice().equals("Start Game")){
-                        inMenu = false;
+                    }else if(key.getKind() == Key.Kind.Enter){
+                        switch(menu.currentChoice()){
+                            case "Start Game":
+                                playerAlive = true;
+                                inMenu = false;
+                                showHighScore = false;
+                                break;
+                            case "HighScore":
+                                System.out.println("Render highscore");
+                                showHighScore = true;
+                                break;
+                            case "Quit Game":
+                                System.out.println("Stänger av spelet");
+                                System.exit(0);
+                                break;
+                        }
                     }
                 }
             }
@@ -92,7 +113,6 @@ public class GameEngine {
 
                 checkScoreChanged();
             }
-            renderer.renderDeathScreen();
             soundEngine.stopAll();
             try {
                 Thread.sleep(5);
@@ -108,7 +128,7 @@ public class GameEngine {
             soundEngine.play( filepath + "sfx_die.wav");
 
             checkHighScore();
-            gameOn = false;
+            inMenu = true;
         }
     }
 
