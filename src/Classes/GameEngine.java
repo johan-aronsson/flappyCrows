@@ -85,6 +85,7 @@ public class GameEngine {
                         showHighScore = false;
                         crow = new Crow();
                         map = new Map();
+                        soundEngine.play(filepath + "8-bit-music.mp3", true);
                         break;
                     case "HighScore":
                         showHighScore = true;
