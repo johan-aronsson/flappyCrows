@@ -81,51 +81,5 @@ public class SoundEngine {
             }
             pauseMode = false;
         }
-
-        public void pauseAll(){
-            Set<String> keys = audioMap.keySet();
-            if (keys.size() == 0) return;
-            for (String s : keys){
-                if (pauseMode)
-                    resume(s);
-                else
-                    pause(s);
-            }
-            pauseMode = !pauseMode;
-        }
-
-        private void pause(String filepath){
-            try {
-                if (audioMap.containsKey(filepath)) {
-                    MediaPlayer mediaPlayer = audioMap.get(filepath);
-                    mediaPlayer.pause();
-                }
-            }
-            catch ( Exception e){
-                e.printStackTrace();
-            }
-        }
-
-        private void resume(String filepath){
-            try {
-                if (audioMap.containsKey(filepath)) {
-                    MediaPlayer mediaPlayer = audioMap.get(filepath);
-                    mediaPlayer.play();
-                }
-            }
-            catch ( Exception e){
-                e.printStackTrace();
-            }
-        }
-
-        public void playFX(String filepath){
-            try {
-                MediaPlayer mediaPlayer = new MediaPlayer( new Media(new File(filepath).toURI().toString()) );
-                mediaPlayer.play();
-            }
-            catch ( Exception e){
-                e.printStackTrace();
-            }
-        }
     }
 

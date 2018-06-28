@@ -10,8 +10,6 @@ public class Menu {
 
     public Menu() {
         start = new Coordinate(Renderer.terminalSizes.getColumns() / 2 - 15, Renderer.terminalSizes.getRows() / 2 - 10);
-        int counter = 0;
-
         for (int x = 0; x < 30; x++) {
             for(int y = 0; y < 20; y++){
                 coordinates.add(new Coordinate(start.getX()+x,start.getY()+y));

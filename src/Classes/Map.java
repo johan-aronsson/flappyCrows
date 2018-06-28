@@ -10,21 +10,21 @@ public class Map {
     private int speed = 0;
 
     public Map() {
-        WallSegment ws = new WallSegment(0, 0);
-        floorAndRoof.add(ws);
-        WallSegment ws2 = new WallSegment(0, 30);
-        floorAndRoof.add(ws2);
+        createRoofFloor(0);
         for (int i = 1; i <= 100; i++) {
             if (i % 10 == 0) {
-                ws = new WallSegment(i);
+                WallSegment ws = new WallSegment(i);
                 walls.add(ws);
             }
-
-            ws = new WallSegment(i, 0);
-            floorAndRoof.add(ws);
-            ws2 = new WallSegment(i, 30);
-            floorAndRoof.add(ws2);
+            createRoofFloor(i);
         }
+    }
+
+    private void createRoofFloor(int x){
+        WallSegment ws = new WallSegment(x, 0);
+        floorAndRoof.add(ws);
+        WallSegment ws2 = new WallSegment(x, 30);
+        floorAndRoof.add(ws2);
     }
 
     public void updateLocation(Crow crow) {

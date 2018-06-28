@@ -3,7 +3,6 @@ package Classes;
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalSize;
-
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -19,23 +18,18 @@ public class Renderer {
         terminalSizes = terminal.getTerminalSize();
     }
 
-    public void render(Crow crow, Map map) {
+    public void renderGame(Crow crow, Map map) {
         terminal.clearScreen();
+        renderCrow(crow);
+        renderMap(map);
+        renderScore(crow);
+    }
+
+    private void renderCrow(Crow crow) {
         terminal.applyBackgroundColor(crow.getCoordinate().getColor());
         terminal.moveCursor(crow.getCoordinate().getX(), crow.getCoordinate().getY());
         terminal.putCharacter(' ');
 
-        renderCrow(crow);
-        renderMap(map);
-
-        String score = "" + crow.getScore();
-        for(int i = 0; i < score.length(); i++){
-            terminal.moveCursor(5+i,0);
-            terminal.putCharacter(score.charAt(i));
-        }
-    }
-
-    private void renderCrow(Crow crow) {
         for(int i = 0; i<crow.getFigure().size();i++){
             Coordinate current = crow.getFigure().get(i);
             terminal.applyBackgroundColor(current.getColor());
@@ -44,7 +38,32 @@ public class Renderer {
         }
     }
 
-    public void render(Menu menu){
+    private void renderMap(Map map) {
+        for (int i = 0; i < map.getWalls().size(); i++) {
+            for (Coordinate coor : map.getWalls().get(i).getWallSegment()) {
+                terminal.applyBackgroundColor(coor.getColor());
+                terminal.moveCursor(coor.getX(), coor.getY());
+                terminal.putCharacter(' ');
+            }
+        }
+        for (int i = 0; i < map.getFloorAndRoof().size(); i++) {
+            for (Coordinate coor : map.getFloorAndRoof().get(i).getWallSegment()) {
+                terminal.applyBackgroundColor(coor.getColor());
+                terminal.moveCursor(coor.getX(), coor.getY());
+                terminal.putCharacter(' ');
+            }
+        }
+    }
+
+    private void renderScore(Crow crow) {
+        String score = "" + crow.getScore();
+        for(int i = 0; i < score.length(); i++){
+            terminal.moveCursor(5+i,0);
+            terminal.putCharacter(score.charAt(i));
+        }
+    }
+
+    public void renderMenu(Menu menu){
         String start = "Start Game";
         String highScore = "Show HighScore";
         String quit = "Quit Game";
@@ -76,25 +95,6 @@ public class Renderer {
                     quitDone=true;
                 }
             }else{
-                terminal.putCharacter(' ');
-            }
-        }
-    }
-
-    private void renderMap(Map map) {
-        for (int i = 0; i < map.getWalls().size(); i++) {
-            for (Coordinate coor : map.getWalls().get(i).getWallSegment()) {
-                terminal.applyBackgroundColor(coor.getColor());
-                terminal.moveCursor(coor.getX(), coor.getY());
-                terminal.putCharacter(' ');
-
-            }
-
-        }
-        for (int i = 0; i < map.getFloorAndRoof().size(); i++) {
-            for (Coordinate coor : map.getFloorAndRoof().get(i).getWallSegment()) {
-                terminal.applyBackgroundColor(coor.getColor());
-                terminal.moveCursor(coor.getX(), coor.getY());
                 terminal.putCharacter(' ');
             }
         }
