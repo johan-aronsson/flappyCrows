@@ -19,7 +19,7 @@ public class GameEngine {
     private SoundEngine soundEngine;
     private boolean playerAlive = true;
     private boolean gameOn = true;
-    private String filepath = "Resource/";//"C:/Users/Administrator/Documents/Java/flappyCrows/Resource/";
+    private String filepath = "Resource/";
     private int oldScore = 0;
     private List<Integer> highScore = new ArrayList<>();
     private Menu menu;

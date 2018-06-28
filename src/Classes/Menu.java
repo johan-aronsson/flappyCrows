@@ -1,13 +1,12 @@
 package Classes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Menu {
     private List<Coordinate> coordinates = new ArrayList<>();
     private int highLightedRow;
-    Coordinate start;
+    private Coordinate start;
 
     public Menu() {
         start = new Coordinate(Renderer.terminalSizes.getColumns() / 2 - 15, Renderer.terminalSizes.getRows() / 2 - 10);

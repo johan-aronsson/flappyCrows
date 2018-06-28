@@ -10,35 +10,29 @@ import java.util.List;
 
 public class Renderer {
     private static Terminal terminal;
-
     public static TerminalSize terminalSizes;
-
-    //public static Coordinate windowMax;
 
     public Renderer() {
         terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF8"));
         terminal.enterPrivateMode();
         terminal.setCursorVisible(false);
         terminalSizes = terminal.getTerminalSize();
-        // windowMax = new Coordinate(terminal.getTerminalSize().getColumns(), terminal.getTerminalSize().getRows());
     }
 
     public void render(Crow crow, Map map) {
         terminal.clearScreen();
-        //for (Drawable g : objects) {
         terminal.applyBackgroundColor(crow.getCoordinate().getColor());
         terminal.moveCursor(crow.getCoordinate().getX(), crow.getCoordinate().getY());
         terminal.putCharacter(' ');
+
         renderCrow(crow);
-
-
         renderMap(map);
+
         String score = "" + crow.getScore();
         for(int i = 0; i < score.length(); i++){
             terminal.moveCursor(5+i,0);
             terminal.putCharacter(score.charAt(i));
         }
-        //}
     }
 
     private void renderCrow(Crow crow) {
@@ -87,7 +81,7 @@ public class Renderer {
         }
     }
 
-    public void renderMap(Map map) {
+    private void renderMap(Map map) {
         for (int i = 0; i < map.getWalls().size(); i++) {
             for (Coordinate coor : map.getWalls().get(i).getWallSegment()) {
                 terminal.applyBackgroundColor(coor.getColor());
